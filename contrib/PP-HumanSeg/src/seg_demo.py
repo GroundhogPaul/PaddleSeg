@@ -100,6 +100,8 @@ def seg_image(args):
     out_img = predictor.run(img, bg_img)
     cv2.imwrite(args.save_dir, out_img)
 
+    print("seg_image(): save file at folder ", args.save_dir)
+
 
 def seg_video(args):
     assert os.path.exists(args.video_path), \

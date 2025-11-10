@@ -5,7 +5,7 @@
 .idea/
 
 # VSCode
-.vscode/
+#.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -117,3 +117,5 @@ test_tipc/web/models/
 
 # EISeg
 EISeg/eiseg/config/setting.txt
+/contrib/PP-HumanSeg/data
+/contrib/PP-HumanSeg/inference_models

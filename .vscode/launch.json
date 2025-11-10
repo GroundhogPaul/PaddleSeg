@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "human_seg_demo",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/contrib/PP-HumanSeg/src/seg_demo.py",
+            "args": [
+                "--config", "${workspaceFolder}/contrib/PP-HumanSeg/inference_models/portrait_pp_humansegv2_lite_256x144_inference_model_with_softmax/deploy.yaml",
+                "--img_path", "${workspaceFolder}/contrib/PP-HumanSeg/data/images/portrait_heng.jpg",
+                "--bg_img_path", "${workspaceFolder}/contrib/PP-HumanSeg/data/images/bg_2.jpg",
+                "--save_dir", "${workspaceFolder}/contrib/PP-HumanSeg/data/images_result/portrait_heng_v2_withbg.jpg",
+                "--use_post_process",
+                "--use_optic_flow",
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "export",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/export.py",
+            "args": [
+                "--config", "${workspaceFolder}/contrib/PP-HumanSeg/configs/human_pp_humansegv2_lite.yml",
+                "--model_path", "${workspaceFolder}/01_BasicRunHumanSeg/human_pp_humansegv2_lite_192x192_pretrained/model.pdparams",
+                "--save_dir", "${workspaceFolder}/01_BasicRunHumanSeg/",
+                "--input_shape", "1", "3", "192", "192"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+    ]
+}
