@@ -85,6 +85,14 @@ def makedirs(save_dir):
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
+def addParaSuffixToPath(sOut, args):
+    dir_name, base_name = os.path.dirname(sOut), os.path.basename(sOut)
+    name_without_ext, ext = os.path.splitext(base_name)
+    of_suffix = "_OF1" if args.use_optic_flow else "_OF0"
+    pp_suffix = "PP1" if args.use_post_process else "PP0"
+    sOut = os.path.join(dir_name, f"{name_without_ext}{of_suffix}{pp_suffix}{ext}")
+
+    return sOut
 
 def seg_image(args):
     assert os.path.exists(args.img_path), \
@@ -98,9 +106,12 @@ def seg_image(args):
     img = cv2.imread(args.img_path)
     bg_img = get_bg_img(args.bg_img_path, img.shape)
     out_img = predictor.run(img, bg_img)
-    cv2.imwrite(args.save_dir, out_img)
 
-    print("seg_image(): save file at folder ", args.save_dir)
+    sOut = addParaSuffixToPath(args.save_dir, args)
+
+    cv2.imwrite(sOut, out_img)
+
+    print("seg_image(): save file as", sOut)
 
 
 def seg_video(args):

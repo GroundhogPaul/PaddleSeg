@@ -12,10 +12,10 @@
             "args": [
                 "--config", "${workspaceFolder}/contrib/PP-HumanSeg/inference_models/portrait_pp_humansegv2_lite_256x144_inference_model_with_softmax/deploy.yaml",
                 "--img_path", "${workspaceFolder}/contrib/PP-HumanSeg/data/images/portrait_heng.jpg",
-                "--bg_img_path", "${workspaceFolder}/contrib/PP-HumanSeg/data/images/bg_2.jpg",
-                "--save_dir", "${workspaceFolder}/contrib/PP-HumanSeg/data/images_result/portrait_heng_v2_withbg.jpg",
+                "--bg_img_path", "${workspaceFolder}/contrib/PP-HumanSeg/data/images/bg_0.jpg",
+                "--save_dir", "${workspaceFolder}/contrib/PP-HumanSeg/data/images_result/portrait_heng_v2.jpg",
                 "--use_post_process",
-                "--use_optic_flow",
+                // "--use_optic_flow",
             ],
             "console": "integratedTerminal",
             "justMyCode": false
