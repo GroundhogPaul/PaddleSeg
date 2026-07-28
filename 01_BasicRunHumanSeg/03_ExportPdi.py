@@ -63,7 +63,7 @@ def main():
         config= 'contrib/PP-HumanSeg/configs/human_pp_humansegv2_lite.yml',
         model_path= '01_BasicRunHumanSeg/human_pp_humansegv2_lite_192x192_pretrained/model.pdparams',
         save_dir= '01_BasicRunHumanSeg',
-        input_shape=[1, 3, 1024, 1024],  # 注意是列表
+        input_shape=[1, 3, 192, 192],  # 注意是列表
         output_op='argmax',
         for_fd=False  # 默认为 False，若需要 True 则设为 True
         )
