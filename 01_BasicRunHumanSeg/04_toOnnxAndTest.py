@@ -2,14 +2,16 @@ import paddle2onnx
 import os
 import cv2
 import numpy as np
+import paddle
+from paddle.static import InputSpec
 
 # ----- file names ----- #
-model_dir = r".\01_BasicRunHumanSeg"
-assert os.path.exists(model_dir)
+model_dir = r"01_BasicRunHumanSeg\human_pp_humansegv2_lite_192x192_pretrained"
+assert os.path.exists(model_dir), f"path doens't exist: {model_dir}"
 model_filename = os.path.join(model_dir, "model.pdmodel")
 params_filename = os.path.join(model_dir, "model.pdiparams")
-save_file = r".\01_BasicRunHumanSeg\humansegv2_lite_192x192_with_softmax.onnx"
-opset_version = 11
+save_file = os.path.join(model_dir, "humansegv2_lite_192x192_with_softmax.onnx")
+opset_version = 19
 
 # ----- export ----- #
 paddle2onnx.export(
@@ -17,6 +19,7 @@ paddle2onnx.export(
     params_filename = params_filename,
     save_file = save_file,
     opset_version = opset_version,
+    enable_onnx_checker = True,
 )
 
 # ----- test the onnx exported ----- #
@@ -37,12 +40,12 @@ def preprocess_image_for_onnx(image_path, target_size=(192, 192)):
     
     return image_batch, image
 
+# import onnxruntime as ort
 net = cv2.dnn.readNetFromONNX(save_file)
 image_path = r"D:\users\xiaoyaopan\PxyAI\PaddleSeg\PaddleSeg\contrib\PP-HumanSeg\data\images\portrait_heng.jpg"
 input_data, original_image = preprocess_image_for_onnx(image_path, (192, 192))
 net.setInput(input_data)
 outputs = net.forward()
-
 
 squeezed_mat = np.squeeze(outputs)
 reshaped_mat = np.expand_dims(squeezed_mat, axis=-1)
